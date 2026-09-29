@@ -28,4 +28,3 @@ Secrets should be transferred separately with an encrypted password manager or
 another secure channel.
 
 Large wallpaper files are included because they are part of the desktop theme.
-
