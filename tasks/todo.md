@@ -9,5 +9,5 @@
 
 ## Checkpoint
 
-- [ ] Existing working-tree theme changes are preserved.
-- [ ] Syntax and reference checks pass.
+- [x] Existing working-tree theme changes are preserved.
+- [x] Syntax and reference checks pass.

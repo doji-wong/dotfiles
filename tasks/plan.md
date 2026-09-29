@@ -18,17 +18,17 @@ files while preserving the current desktop behavior.
 
 ## Task list
 
-### Phase 1: Reproducible baseline
+### Phase 1: Reproducible baseline — complete
 
-- [ ] Add a tracked monitor default and make the active monitor source work from
+- [x] Add a tracked monitor default and make the active monitor source work from
       a fresh clone.
-- [ ] Remove or guard references to absent diagnosis, VM, and Qtile scripts.
-- [ ] Remove committed backup artifacts and document generated/local state.
+- [x] Remove or guard references to absent diagnosis, VM, and Qtile scripts.
+- [x] Remove committed backup artifacts and document generated/local state.
 
-### Phase 2: Safer installation
+### Phase 2: Safer installation — complete
 
-- [ ] Add installer preflight, dry-run, confirmation, and safer backup behavior.
-- [ ] Keep package metadata out of the Stow package root.
+- [x] Add installer preflight, dry-run, confirmation, and safer backup behavior.
+- [x] Keep package metadata out of the Stow package root.
 
 ### Phase 3: Own the active runtime
 
