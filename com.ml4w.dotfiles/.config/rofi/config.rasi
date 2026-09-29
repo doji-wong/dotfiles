@@ -247,18 +247,18 @@ textbox {
 
 //@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/spotlight.rasi"
+//@theme "~/.config/rofi/themes/spotlight.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/rounded-white.rasi"
+//@theme "~/.config/rofi/themes/rounded-white.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/spotlight.rasi"
+//@theme "~/.config/rofi/themes/spotlight.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/rounded-white.rasi"
+//@theme "~/.config/rofi/themes/rounded-white.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/spotlight.rasi"
+//@theme "~/.config/rofi/themes/spotlight.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/spotlight.rasi"
+//@theme "~/.config/rofi/themes/spotlight.rasi"
 
-//@theme "/home/doji/.config/rofi/themes/rounded-white.rasi"
+//@theme "~/.config/rofi/themes/rounded-white.rasi"
 
-@theme "/home/doji/.config/rofi/themes/rounded-white.rasi"
+@theme "~/.config/rofi/themes/rounded-white.rasi"

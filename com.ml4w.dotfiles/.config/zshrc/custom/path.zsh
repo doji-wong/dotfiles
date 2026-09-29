@@ -1,1 +1,1 @@
-export PATH="/home/doji/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

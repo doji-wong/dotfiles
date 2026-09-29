@@ -1,4 +1,4 @@
 
 
 # Added by Antigravity CLI installer
-set -gx PATH "/home/doji/.local/bin" $PATH
+set -gx PATH "$HOME/.local/bin" $PATH

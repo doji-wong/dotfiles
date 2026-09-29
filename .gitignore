@@ -12,7 +12,9 @@ com.ml4w.dotfiles/.config/fish/fish_variables
 com.ml4w.dotfiles/.config/gtk-3.0/bookmarks
 com.ml4w.dotfiles/.config/hypr/monitors.conf
 com.ml4w.dotfiles/.config/hypr/monitors.lua
-com.ml4w.dotfiles/.config/hypr/conf/monitors/
+com.ml4w.dotfiles/.config/hypr/conf/monitors/*
+!com.ml4w.dotfiles/.config/hypr/conf/monitors/
+!com.ml4w.dotfiles/.config/hypr/conf/monitors/default.conf
 com.ml4w.dotfiles/.config/nwg-displays/config
 
 # Never commit credentials or histories
@@ -25,4 +27,3 @@ com.ml4w.dotfiles/.config/nwg-displays/config
 **/*cookie*
 **/*.key
 **/*.pem
-

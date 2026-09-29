@@ -4,12 +4,30 @@ set -euo pipefail
 repo_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 package_dir="$repo_dir/packages"
 dotfiles_only=false
+dry_run=false
+assume_yes=false
 
-if [[ "${1:-}" == "--dotfiles-only" ]]; then
-    dotfiles_only=true
-elif [[ $# -gt 0 ]]; then
-    echo "Usage: $0 [--dotfiles-only]" >&2
-    exit 2
+usage() {
+    echo "Usage: $0 [--dotfiles-only] [--dry-run] [--yes]" >&2
+}
+
+for arg in "$@"; do
+    case "$arg" in
+        --dotfiles-only) dotfiles_only=true ;;
+        --dry-run) dry_run=true ;;
+        --yes) assume_yes=true ;;
+        *) usage; exit 2 ;;
+    esac
+done
+
+if ! command -v stow >/dev/null 2>&1; then
+    echo "GNU Stow is required. On Arch, run: sudo pacman -S stow" >&2
+    exit 1
+fi
+
+if [[ ! -r "$package_dir/pacman.txt" || ! -r "$package_dir/aur.txt" || ! -r "$package_dir/flatpak.txt" ]]; then
+    echo "Package manifests are missing or unreadable under $package_dir." >&2
+    exit 1
 fi
 
 if [[ "$dotfiles_only" == false ]]; then
@@ -19,6 +37,31 @@ if [[ "$dotfiles_only" == false ]]; then
         exit 1
     fi
 
+    if ! command -v pacman >/dev/null 2>&1; then
+        echo "pacman is required for package installation." >&2
+        exit 1
+    fi
+fi
+
+if [[ "$dry_run" == true ]]; then
+    echo ":: Dry run; no files or packages will be changed."
+    if [[ "$dotfiles_only" == false ]]; then
+        echo "sudo pacman -Syu --needed -- [packages from $package_dir/pacman.txt]"
+        echo "yay -S --needed -- [packages from $package_dir/aur.txt] (if yay is installed)"
+        echo "flatpak install --noninteractive --or-update flathub [apps from $package_dir/flatpak.txt] (if flatpak is installed)"
+    fi
+    stow --simulate --dir "$repo_dir" --target "$HOME" \
+        --ignore='^config\.dotinst$' --restow com.ml4w.dotfiles
+    exit 0
+fi
+
+if [[ "$assume_yes" == false ]]; then
+    echo "This will install packages and/or replace conflicting files under $HOME."
+    read -r -p "Continue? [y/N] " answer
+    [[ "$answer" =~ ^[Yy]$ ]] || { echo "Cancelled."; exit 0; }
+fi
+
+if [[ "$dotfiles_only" == false ]]; then
     mapfile -t official_packages < "$package_dir/pacman.txt"
     sudo pacman -Syu --needed -- "${official_packages[@]}"
 
@@ -35,12 +78,7 @@ if [[ "$dotfiles_only" == false ]]; then
     fi
 fi
 
-if ! command -v stow >/dev/null 2>&1; then
-    echo "GNU Stow is required. On Arch, run: sudo pacman -S stow" >&2
-    exit 1
-fi
-
-backup_dir="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
+backup_dir="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)-$$"
 mkdir -p "$backup_dir"
 
 while IFS= read -r -d '' source_file; do
@@ -56,7 +94,8 @@ while IFS= read -r -d '' source_file; do
     fi
 done < <(find "$repo_dir/com.ml4w.dotfiles" -type f -print0)
 
-stow --dir "$repo_dir" --target "$HOME" --restow com.ml4w.dotfiles
+stow --dir "$repo_dir" --target "$HOME" \
+    --ignore='^config\.dotinst$' --restow com.ml4w.dotfiles
 
 if [[ -z "$(find "$backup_dir" -mindepth 1 -print -quit)" ]]; then
     rmdir "$backup_dir"
