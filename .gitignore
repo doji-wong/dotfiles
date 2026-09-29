@@ -1,0 +1,28 @@
+# Generated/runtime files
+*.log
+*.tmp
+*.swp
+*.zwc
+*.bak
+*~
+.DS_Store
+
+# Machine-local state
+com.ml4w.dotfiles/.config/fish/fish_variables
+com.ml4w.dotfiles/.config/gtk-3.0/bookmarks
+com.ml4w.dotfiles/.config/hypr/monitors.conf
+com.ml4w.dotfiles/.config/hypr/monitors.lua
+com.ml4w.dotfiles/.config/hypr/conf/monitors/
+com.ml4w.dotfiles/.config/nwg-displays/config
+
+# Never commit credentials or histories
+**/.env
+**/.env.*
+**/*credential*
+**/*secret*
+**/*token*
+**/*history*
+**/*cookie*
+**/*.key
+**/*.pem
+

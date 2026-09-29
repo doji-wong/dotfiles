@@ -1,0 +1,6 @@
+# WireGuard Manual Controls
+alias vpon='sudo wg-quick up vin'
+alias vpoff='sudo wg-quick down vin'
+alias vpstat='sudo wg show'
+export PATH=~/.npm-global/bin:$PATH
+
